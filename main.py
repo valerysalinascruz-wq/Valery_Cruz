@@ -43,7 +43,7 @@ def main():
 
     while True:
         try:
-            print(f"Imprima Ctrl Z para salir\n")
+            print(f"Presione Ctrl Z para salir")
             pedircad = input("Ingrese la cadena SEPARANDO con comas los valores: \n")
         except EOFError:
             break
