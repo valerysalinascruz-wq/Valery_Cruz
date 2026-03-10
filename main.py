@@ -62,7 +62,7 @@ def main():
     """
     while True:
         try:
-            pedircad = input("Ingrese la cadena SEPARANDO con comas los valores: ")
+            pedircad = input("Ingrese la cadena SEPARANDO con comas los valores: \n")
         except EOFError:
             break
 
@@ -71,6 +71,7 @@ def main():
 
         resultadosuma = procesar_linea(pedircad)
         print(f"Resultado de la suma de la cadena: \n",resultadosuma)
+        print(f"Ingrese Ctrl Z apara salor\n")
 
 
 if __name__ == "__main__":
