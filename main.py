@@ -1,12 +1,6 @@
 import sys
 
 def limpiar_valor(valor):
-    """
-    Limpia un valor individual:
-    - Quita espacios
-    - Elimina caracteres no validos
-    - Retorna el numero limpio como string
-    """
     
     valor = valor.strip()
     caracteres_validos = "0123456789.-"
@@ -20,14 +14,6 @@ def limpiar_valor(valor):
 
 
 def procesar_linea(linea):
-    """
-    Procesa una linea completa:
-    - Separa por comas
-    - Limpia cada valor
-    - Trunca a entero
-    - Suma todos
-    - Retorna el resultado
-    """
 
     linea = linea.strip()
 
@@ -54,14 +40,10 @@ def procesar_linea(linea):
 
 
 def main():
-    """
-    Lee de stdin linea por linea
-    Procesa cada linea
-    Imprime el resultado
-    Pedira las dos cadenas
-    """
+
     while True:
         try:
+            print(f"Imprima Ctrl Z para salir\n")
             pedircad = input("Ingrese la cadena SEPARANDO con comas los valores: \n")
         except EOFError:
             break
@@ -71,7 +53,6 @@ def main():
 
         resultadosuma = procesar_linea(pedircad)
         print(f"Resultado de la suma de la cadena: \n",resultadosuma)
-        print(f"Ingrese Ctrl Z apara salor\n")
 
 
 if __name__ == "__main__":
