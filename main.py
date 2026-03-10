@@ -61,7 +61,10 @@ def main():
     Pedira las dos cadenas
     """
     while True:
-        pedircad=input(f"Ingrese la cadena SEPARANDO con comas los valores: \n")
+        try:
+            pedircad = input("Ingrese la cadena SEPARANDO con comas los valores: ")
+        except EOFError:
+            break
 
         if pedircad == '':
             break
