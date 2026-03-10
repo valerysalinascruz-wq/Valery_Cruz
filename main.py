@@ -60,14 +60,14 @@ def main():
     Imprime el resultado
     Pedira las dos cadenas
     """
-    lacadena=input("Ingresa la cadena: ")
-    resultadosuma = procesar_linea(lacadena)
+    while True:
+        pedircad=input(f"Ingrese la cadena SEPARANDO con comas los valores: \n")
 
-    print("Resultado de la suma de la cadena: ",resultadosuma)
+        if pedircad == '':
+            break
 
-    for linea in sys.stdin:
-        resultado = procesar_linea(linea)
-        print(resultado)
+        resultadosuma = procesar_linea(pedircad)
+        print(f"Resultado de la suma de la cadena: \n",resultadosuma)
 
 
 if __name__ == "__main__":
