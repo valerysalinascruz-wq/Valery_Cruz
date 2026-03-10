@@ -58,7 +58,12 @@ def main():
     Lee de stdin linea por linea
     Procesa cada linea
     Imprime el resultado
+    Pedira las dos cadenas
     """
+    lacadena=input("Ingresa la cadena: ")
+    resultadosuma = procesar_linea(lacadena)
+
+    print("Resultado de la suma de la cadena: ",resultadosuma)
 
     for linea in sys.stdin:
         resultado = procesar_linea(linea)
