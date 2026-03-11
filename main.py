@@ -44,7 +44,7 @@ def main():
 
     while True:
         try:
-            pedircad = input("La cadena SEPARANDO con comas los valores: \n")
+            pedircad = input("Ingrese la cadena SEPARANDO con comas los valores: \n")
         except EOFError: #Error si no hay entrada
             break
 
