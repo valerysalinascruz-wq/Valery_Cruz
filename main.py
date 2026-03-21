@@ -56,5 +56,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-print(convertir_a_Cel(50,'F'))
-print(clasf_temp(10)) 
