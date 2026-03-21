@@ -25,7 +25,10 @@ def clasf_temp(temp):
 def main():
     '''
     # Leer y descartar encabezado de entrada
-
+    '''
+    print("ciudad,temperatura_celsius,clasificacion")
+    primera_linea = True
+    '''
     
     # Imprimir encabezado de salida
 
@@ -54,4 +57,4 @@ def main():
 if __name__ == "__main__":
     main()
 print(convertir_a_Cel(50,'F'))
-print(clasf_temp(10))
+print(clasf_temp(10)) 
