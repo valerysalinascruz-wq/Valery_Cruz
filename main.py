@@ -23,17 +23,21 @@ def clasf_temp(temp):
         return "Extremo"
      
 def main():
+
     '''
-    # Leer y descartar encabezado de entrada
+    # Encabezado
     '''
     print("ciudad,temperatura_celsius,clasificacion")
     primera_linea = True
-    '''
+    for linea in sys.stdin:
+        linea = linea.strip()
+        if primera_linea:
+            primera_linea = False
+            continue
     
-    # Imprimir encabezado de salida
+    
+    '''
 
-        
-        # Saltar encabezado
 
         # Saltar lineas vacias
 
