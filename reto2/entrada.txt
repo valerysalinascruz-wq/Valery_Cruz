@@ -1,0 +1,9 @@
+ciudad,temperatura,unidad
+Madrid,18,C
+Los Angeles,77,F
+Reykjavik,-5,C
+Buenos Aires,86,F
+Toronto,10,C
+Seul,59,F
+El Cairo,40,C
+Sydney,68,F
