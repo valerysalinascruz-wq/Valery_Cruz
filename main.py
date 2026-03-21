@@ -34,7 +34,7 @@ def main():
         if primera_linea:
             primera_linea = False
             continue
-    
+    print("PROCESANDO: ",linea)
     
     '''
 
