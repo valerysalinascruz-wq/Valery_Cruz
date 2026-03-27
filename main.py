@@ -2,8 +2,8 @@ import sys
 
 
 def main():
-    productos={}
-    primera = True
+    datos_productos={}
+    primera_linea = True
 
     for linea in sys.stdin:
         linea=linea.strip()
@@ -11,55 +11,52 @@ def main():
         if not linea:
             continue
 
-        if primera:
-            primera=False
+        if primera_linea:
+            primera_linea=False
             continue
 
-        partes =linea.split(",")
+        columnas=linea.split(",")
 
-        if len(partes)<4:
+        if len(columnas)<4:
             continue
 
-        partes = partes[:4]
-
-        producto=partes[1]
+        columnas = columnas[:4]
+        producto=columnas[1]
 
         try:
-            cantidad=int(partes[2])
-            precio=float(partes[3])
+            cantidad=int(columnas[2])
+            precio=float(columnas[3])
         except:
             continue
 
-        if producto not in productos:
-            productos[producto]={
-                "unidades": 0,
-                "ingreso": 0.0
+        if producto not in datos_productos:
+            datos_productos[producto]={
+                "unidades_vendidas": 0,
+                "ingreso_total": 0.0
             }
 
-        productos[producto]["unidades"] += cantidad
-        productos[producto]["ingreso"] += cantidad * precio
+        datos_productos[producto]["unidades_vendidas"] += cantidad
+        datos_productos[producto]["ingreso_total"] += cantidad * precio
 
-        for prod in productos:
-            unidades = productos[prod]["unidades"]
-            ingreso = productos[prod]["ingreso"]
+        for producto in datos_productos:
+            unidades = datos_productos[producto]["unidades_vendidas"]
+            ingreso = datos_productos[producto]["ingreso_total"]
 
             if unidades > 0:
-                productos[prod]["promedio"] = ingreso / unidades
+                datos_productos[producto]["precio_promedio"] = ingreso / unidades
             else:
-                productos["promedio"] = 0
+                datos_productos[producto]["precio_promedio"] = 0.0
 
-        lista = list(productos.items())
-
-        ordenados = sorted(
-            lista,
-            key=lambda x: x[1]["ingreso"],
+        productos_ordenados = sorted(
+            datos_productos.items(),
+            key=lambda x: x[1]["ingreso_total"],
             reverse=True
         )
 
-        print("producto,unidades_vendidaas,ingreso_total,precio_promedio")
+        print("producto,unidades_vendidas,ingreso_total,precio_promedio")
 
-        for nombre, datos in ordenados:
-            print(f"{nombre},{datos['unidades']},{datos['ingreso']: .2f},{datos['promedio']: .2f}")
+        for nombre, datos in productos_ordenados:
+            print(f"{nombre},{datos['unidades_vendidas']},{datos['ingreso_total']:.2f},{datos['precio_promedio']:.2f}")
 
 
 if __name__ == "__main__":
