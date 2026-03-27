@@ -39,7 +39,17 @@ def main():
         productos[producto]["unidades"] += cantidad
         productos[producto]["ingreso"] += cantidad * precio
 
+        for prod in productos:
+            unidades = productos[prod]["unidades"]
+            ingreso = productos[prod]["ingreso"]
+
+            if unidades > 0:
+                productos[prod]["promedio"] = ingreso / unidades
+            else:
+                productos["promedio"] = 0
+
         print(productos)
+
 
 # Saltar encabezado
 
@@ -54,7 +64,6 @@ def main():
 
 # Acumular
 
-# Calcular precio promedio
 
 
 # Ordenar por ingreso descendente
