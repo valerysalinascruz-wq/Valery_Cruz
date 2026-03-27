@@ -2,22 +2,26 @@ import sys
 
 
 def main():
+    productos={}
     primera = True
+
     for linea in sys.stdin:
         linea=linea.strip()
+
         if not linea:
             continue
+
         if primera:
             primera=False
             continue
-        partes =linea.split(",")
 
+        partes =linea.split(",")
 
         if len(partes)<4:
             continue
 
         partes = partes[:4]
-        fecha =partes[0]
+
         producto=partes[1]
 
         try:
@@ -26,7 +30,16 @@ def main():
         except:
             continue
 
-        print(producto, cantidad,precio)
+        if producto not in productos:
+            productos[producto]={
+                "unidades": 0,
+                "ingreso": 0.0
+            }
+
+        productos[producto]["unidades"] += cantidad
+        productos[producto]["ingreso"] += cantidad * precio
+
+        print(productos)
 
 # Saltar encabezado
 
