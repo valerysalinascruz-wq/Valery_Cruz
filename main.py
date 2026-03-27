@@ -38,25 +38,25 @@ def main():
         datos_productos[producto]["unidades_vendidas"] += cantidad
         datos_productos[producto]["ingreso_total"] += cantidad * precio
 
-        for producto in datos_productos:
-            unidades = datos_productos[producto]["unidades_vendidas"]
-            ingreso = datos_productos[producto]["ingreso_total"]
+    for producto in datos_productos:
+        unidades = datos_productos[producto]["unidades_vendidas"]
+        ingreso = datos_productos[producto]["ingreso_total"]
 
-            if unidades > 0:
-                datos_productos[producto]["precio_promedio"] = ingreso / unidades
-            else:
-                datos_productos[producto]["precio_promedio"] = 0.0
+        if unidades > 0:
+            datos_productos[producto]["precio_promedio"] = ingreso / unidades
+        else:
+            datos_productos[producto]["precio_promedio"] = 0.0
 
-        productos_ordenados = sorted(
-            datos_productos.items(),
-            key=lambda x: x[1]["ingreso_total"],
-            reverse=True
-        )
+    productos_ordenados = sorted(
+        datos_productos.items(),
+        key=lambda x: x[1]["ingreso_total"],
+        reverse=True
+    )
 
-        print("producto,unidades_vendidas,ingreso_total,precio_promedio")
+    print("producto,unidades_vendidas,ingreso_total,precio_promedio")
 
-        for nombre, datos in productos_ordenados:
-            print(f"{nombre},{datos['unidades_vendidas']},{datos['ingreso_total']:.2f},{datos['precio_promedio']:.2f}")
+    for nombre, datos in productos_ordenados:
+        print(f"{nombre},{datos['unidades_vendidas']},{datos['ingreso_total']:.2f},{datos['precio_promedio']:.2f}")
 
 
 if __name__ == "__main__":
