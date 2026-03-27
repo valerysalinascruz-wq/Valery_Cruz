@@ -48,6 +48,14 @@ def main():
             else:
                 productos["promedio"] = 0
 
+        lista = list(productos.items())
+
+        ordenados = sorted(
+            lista,
+            key=lambda x: x[1]["ingreso"],
+            reverse=True
+        )
+
         print(productos)
 
 
@@ -63,10 +71,6 @@ def main():
 # Crear entrada si no existe
 
 # Acumular
-
-
-
-# Ordenar por ingreso descendente
 
 
 # Imprimir salida
