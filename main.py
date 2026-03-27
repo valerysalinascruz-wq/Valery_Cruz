@@ -1,13 +1,32 @@
 import sys
- # Diccionario para agrupar por producto
 
 
-# Leer todas las lineas
 def main():
+    primera = True
     for linea in sys.stdin:
         linea=linea.strip()
-        if linea:
-            print(linea)
+        if not linea:
+            continue
+        if primera:
+            primera=False
+            continue
+        partes =linea.split(",")
+
+
+        if len(partes)<4:
+            continue
+
+        partes = partes[:4]
+        fecha =partes[0]
+        producto=partes[1]
+
+        try:
+            cantidad=int(partes[2])
+            precio=float(partes[3])
+        except:
+            continue
+
+        print(producto, cantidad,precio)
 
 # Saltar encabezado
 
