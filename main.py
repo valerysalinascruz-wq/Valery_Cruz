@@ -56,24 +56,10 @@ def main():
             reverse=True
         )
 
-        print(productos)
+        print("producto,unidades_vendidaas,ingreso_total,precio_promedio")
 
-
-# Saltar encabezado
-
-
-# Saltar lineas vacias
-
-# Parsear linea
-
-# Convertir cantidad y precio (con manejo de errores)
-
-# Crear entrada si no existe
-
-# Acumular
-
-
-# Imprimir salida
+        for nombre, datos in ordenados:
+            print(f"{nombre},{datos['unidades']},{datos['ingreso']: .2f},{datos['promedio']: .2f}")
 
 
 if __name__ == "__main__":
