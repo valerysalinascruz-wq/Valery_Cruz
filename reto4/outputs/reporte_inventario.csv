@@ -1,5 +1,6 @@
 sku,nombre,categoria,stock_actual,stock_minimo,unidades_faltantes,valor_inventario
-SKU002,Mouse Logitech,Accesorios,3,15,12,1050.00
-SKU005,Audifonos Sony,Accesorios,2,10,8,2400.00
-SKU001,Laptop HP,Electronica,5,10,5,75000.00
-SKU007,SSD 1TB,Almacenamiento,0,5,5,0.00
+SKU100,Laptop Dell,Electronica,2,10,8,40000.00
+SKU104,Audifonos Pro,Audio,1,8,7,1500.00
+SKU108,Tablet Lenovo,Electronica,4,10,6,24000.00
+SKU102,Teclado RGB,Accesorios,0,5,5,0.00
+SKU106,Camara Sony,Video,3,6,3,30000.00

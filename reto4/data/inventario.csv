@@ -1,13 +1,15 @@
 sku,nombre,categoria,precio,stock,stock_minimo
-SKU001,Laptop HP,Electronica,15000.00,5,10
-SKU002,Mouse Logitech,Accesorios,350.00,3,15
-SKU003,Teclado Mecanico,Accesorios,800.00,20,10
-SKU004,Monitor LG,Electronica,6000.00,8,5
-SKU005,Audifonos Sony,Accesorios,1200.00,2,10
-SKU006,Webcam HD,Accesorios,450.00,25,20
-SKU007,SSD 1TB,Almacenamiento,1800.00,0,5
-SKU008,Cable HDMI,Cables,N/A,12,5
-SKU009,Router WiFi,Redes,2500.00,abc,10
-SKU010,Mousepad,Accesorios,200.00,30,???
-SKU011,Impresora,Impresion
-SKU012,Tablet,Electronica,7000.00,3,5,extra
+SKU100,Laptop Dell,Electronica,20000.00,2,10
+SKU101,Mouse Gamer,Accesorios,500.00,15,10
+SKU102,Teclado RGB,Accesorios,1200.00,0,5
+SKU103,Monitor Samsung,Electronica,7000.00,5,5
+SKU104,Audifonos Pro,Audio,1500.00,1,8
+SKU105,Disco Duro,Almacenamiento,2500.00,10,10
+SKU106,Camara Sony,Video,10000.00,3,6
+SKU107,Bocina Mini,Audio,800.00,20,15
+SKU108,Tablet Lenovo,Electronica,6000.00,4,10
+SKU109,Cable USB,Cables,N/A,10,5
+SKU110,Router TP-Link,Redes,1200.00,abc,8
+SKU111,Mousepad XL,Accesorios,300.00,25,??
+SKU112,Impresora Epson
+SKU113,Smartwatch,Electronica,5000.00,2,5,extra
