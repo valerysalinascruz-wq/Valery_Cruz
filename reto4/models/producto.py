@@ -10,7 +10,7 @@ class Producto :
     def necesita_reorden(self) :
         return self.stock < self.stock_minimo
     def unidades_faltantes(self) :
-        if self.necesita_reordenar():
+        if self.necesita_reorden():
             return self.stock_minimo - self.stock 
         return 0
     def valor_inventario(self):

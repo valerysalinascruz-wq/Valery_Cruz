@@ -1,4 +1,4 @@
-def leer_inventari(ruta) :
+def leer_inventario(ruta) :
     productos = []
 
     with open(ruta, "r", encoding= "utf-8") as archivo:

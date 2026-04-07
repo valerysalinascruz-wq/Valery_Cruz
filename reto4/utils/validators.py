@@ -17,7 +17,7 @@ def validar_stock(stock):
     except:
         return False
 
-def validar_productos(sku,nombre,categoria,precio,stock,stock_minimo) :
+def validar_producto(sku,nombre,categoria,precio,stock,stock_minimo) :
     if not validar_sku(sku):
         return False,"SKU invalido" 
     if not nombre or not str(nombre).strip():
