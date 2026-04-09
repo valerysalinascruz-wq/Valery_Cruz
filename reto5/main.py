@@ -76,3 +76,44 @@ def perfilar_columna(nombre, valores):
         "porcentaje_unicos" : pct_unicos,
         "ejemplo_valor" : ejemplo
     }
+
+def leer_csv(ruta):
+    with open(ruta, 'r', encoding='utf-8') as f:
+        lineas = f.readlines()
+
+    if not lineas:
+        return [], []
+
+    encabezados = lineas[0].strip().split(',')
+
+    filas = [
+        linea.strip().split(',')
+        for linea in linea[1:]
+        if linea.strip()
+    ]
+
+    return encabezados, filas
+
+def escribir_csv(ruta, perfiles):
+    columnas = [
+        "nombre_columna", "tipo_inferido", "total_registros",
+        "valores_nulos", "porcentaje_nulos",
+        "valores_unicos", "porcentaje_unicos","ejemplo_valor"
+    ]
+
+    with open(ruta, 'w', encoding='utf-8') as f:
+        f.write(",".join(columnas)+ "\n")
+
+        for p in perfiles:
+            fila = [
+                str(p["nombre_columna"]),
+                str(p["tipo_inferido"]),
+                str(p["total_registros"]),
+                str(p["valores_nulos"]),
+                f"{p['porcentaje_nulos']:.2f}",
+                str(p["valores_unicos"]),
+                f"{p['porcentaje_unicos']:.2f}",
+                str(p["ejemplo_valor"])
+            ]
+            f.write(",".join(fila) + "\n")
+            
