@@ -116,4 +116,34 @@ def escribir_csv(ruta, perfiles):
                 str(p["ejemplo_valor"])
             ]
             f.write(",".join(fila) + "\n")
-            
+
+def main():
+    parser = argpares.ArgumentParser(description="Perfilador CSV")
+
+    parser.add_argument("--i", "--input", required=True)
+    parser.add_argument("--o", "--output", required=True)
+
+    arg = parser.parse_args()
+
+    encabezados, filas =leer_csv(args_input)
+
+    if not encabezados:
+        print("Archivo vacio")
+        sys.exit(1)
+
+    perfiles = []
+
+    for i,col in enumerate(encabezados):
+        valores = [
+            fila[i] if i < len(fila) else ""
+            for fila in filas
+        ]
+
+        perfiles.append(perfilar_columna(col, valores))
+
+    escribir_csv(args.output, perfiles)
+
+    print("Perfil generado correctamente")
+
+if __name__ == "__main__":
+    main()
