@@ -29,4 +29,25 @@ def es_booleano(valor):
     return str(valor).strip().lower()in[
         'true', 'false', 'yes', 'no', 'si', '1', '0', 't', 'f'
     ] 
-    
+
+def inferir_tipo(valores):
+    valores_validos = [v for v in valores if not es_valor_nulo(v)]
+
+    if not valores_validos:
+        return "texto"
+
+    total = len(valores_validos)
+    umbral = 0.8
+
+    num = sum(es_numerico(v) for v in valores_validos)
+    fec = sum(es_fecha(v) for v in valores_validos)
+    boo = sum(es_booleado(v) for v in valores_validos)
+
+    if fec/total >= umbral:
+        return "fecha"
+    elif boo/total >= umbral:
+        return "booleado"
+    elif num/total >= umbral:
+        return "numerico"
+    else:
+        return "texto"
