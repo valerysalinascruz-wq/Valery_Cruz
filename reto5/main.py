@@ -51,3 +51,28 @@ def inferir_tipo(valores):
         return "numerico"
     else:
         return "texto"
+
+def perfilar_columna(nombre, valores):
+    total = len(valores)
+
+    nulos = sum(1 for v in valores if es_valor_nulo(v))
+    no_nulos = [v for v in valores if not es_valor_nulo(v)]
+
+    unicos = len(set(no_nulos))
+    ejempli = no_nulos[0] if no_nulos else ""
+
+    tipo = inferir_tipo(valores)
+
+    pct_nulos = round((nulo / total)* 100,2) if total else 0.00
+    pct_unicos = round((unicos / total)* 100,2) if total else 0.00
+
+    return {
+        "nombre_columna" : nombre,
+        "tipo,inferido" : tipo,
+        "total_registros" : total,
+        "valores_nulos" : nulos,
+        "porcentaje_nulos" : pct_nulos,
+        "valores_unicos" : unicos,
+        "porcentaje_unicos" : pct_unicos,
+        "ejemplo_valor" : ejemplo
+    }
