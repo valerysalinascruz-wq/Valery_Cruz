@@ -41,12 +41,12 @@ def inferir_tipo(valores):
 
     num = sum(es_numerico(v) for v in valores_validos)
     fec = sum(es_fecha(v) for v in valores_validos)
-    boo = sum(es_booleado(v) for v in valores_validos)
+    boo = sum(es_booleano(v) for v in valores_validos)
 
     if fec/total >= umbral:
         return "fecha"
     elif boo/total >= umbral:
-        return "booleado"
+        return "booleano"
     elif num/total >= umbral:
         return "numerico"
     else:
@@ -59,16 +59,16 @@ def perfilar_columna(nombre, valores):
     no_nulos = [v for v in valores if not es_valor_nulo(v)]
 
     unicos = len(set(no_nulos))
-    ejempli = no_nulos[0] if no_nulos else ""
+    ejemplo = no_nulos[0] if no_nulos else ""
 
     tipo = inferir_tipo(valores)
 
-    pct_nulos = round((nulo / total)* 100,2) if total else 0.00
+    pct_nulos = round((nulos / total)* 100,2) if total else 0.00
     pct_unicos = round((unicos / total)* 100,2) if total else 0.00
 
     return {
         "nombre_columna" : nombre,
-        "tipo,inferido" : tipo,
+        "tipo_inferido" : tipo,
         "total_registros" : total,
         "valores_nulos" : nulos,
         "porcentaje_nulos" : pct_nulos,
@@ -88,7 +88,7 @@ def leer_csv(ruta):
 
     filas = [
         linea.strip().split(',')
-        for linea in linea[1:]
+        for linea in lineas[1:]
         if linea.strip()
     ]
 
@@ -118,18 +118,23 @@ def escribir_csv(ruta, perfiles):
             f.write(",".join(fila) + "\n")
 
 def main():
-    parser = argpares.ArgumentParser(description="Perfilador CSV")
+    parser = argparse.ArgumentParser(description="Perfilador CSV")
 
-    parser.add_argument("--i", "--input", required=True)
-    parser.add_argument("--o", "--output", required=True)
+    parser.add_argument("-i", "--input", required=True)
+    parser.add_argument("-o", "--output", required=True) 
 
-    arg = parser.parse_args()
+    args = parser.parse_args()
 
-    encabezados, filas =leer_csv(args_input)
+    print(f"Perfilado archivo: {args.input}")
+
+    encabezados, filas =leer_csv(args.input)
 
     if not encabezados:
         print("Archivo vacio")
         sys.exit(1)
+
+    print(f"Columnas: {len(encabezados)}")
+    print(f"Registros: {len(filas)}")
 
     perfiles = []
 
@@ -143,7 +148,8 @@ def main():
 
     escribir_csv(args.output, perfiles)
 
-    print("Perfil generado correctamente")
+    print(f"Perfil generado en: {args.output}")
+    print("Perfil Generado Correctamente")
 
 if __name__ == "__main__":
     main()
