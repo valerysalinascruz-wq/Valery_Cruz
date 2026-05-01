@@ -24,6 +24,28 @@ def validar_producto(codigo: str) -> Dict:
     return resultado
 
 #validar envio 
+def validar_envio(codigo: str) -> Dict:
+    resultado = {
+        "valido": False,
+        "fehca": None,
+        "secuencial": None
+    }
+
+    patron= r'^ENV-(/d{4})-(/d{2})-(/d{2})-(/d{6})$'
+    match =re.match(patron, codigo)
+
+    if match:
+        anio=int(match.group(1))
+        mes=int(match.group(2))
+        dia=int(match.group(3))
+        sec=match.group(4)
+
+        if 2020 <= anio <= 2030 and 1 <= mes <= 12 and 1 <= dia <= 31:
+            resultado["valido"] = True
+            resultado["fecha"] = f"{anio}-{mes:02d}-{dia:02d}"
+            resultado["secuencial"]= sec
+
+    return resultado
 
 #validar_empleado
 
