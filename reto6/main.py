@@ -242,5 +242,5 @@ if __name__ == "__main__":
         "RANDOM-CODE"
     ]
 
-    reporte = procesar_lote(CODIGOS_PRUEBA)
+    reporte = procesar_lotes(CODIGOS_PRUEBA)
     mostrar_reporte(reporte)
