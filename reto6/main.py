@@ -70,7 +70,58 @@ def validar_empleado(codigo: str) -> Dict:
     return resultado
 
 #validar_factura
+def validar_factura(codigo: str) -> Dict:
+    resultado ={
+        "valido": False,
+        "serie": None,
+        "numero": None
+    }
+
+    patron = r'^FAC-([A-Z])-(/d{6})$'
+    match = re.match(patron, codigo)
+
+    if match:
+        serie = match.group(1)
+        numero = match.group(2)
+
+        if serie in Series_validas:
+            resultado["valido"] = True
+            resultado["serie"] = serie
+            resultado["numero"] = numero
+
+    return resultado 
 
 #validador universal
+def validar_codigo(codigo: str) -> Dict:
+    resultado ={
+        "codigo": codigo,
+        "tipo": "desconocido",
+        "valido": False,
+        "detalles": {}
+    }
+    if codigo.startswith("ENV"):
+        resultado["tipo"] = "envio"
+        res = validar_envio(codigo)
+
+    elif codigo.startswith("EMP"):
+        resultado["tipo"] = "empleado"
+        res = validar_empleado(codigo)
+
+    elif codigo.startswith("FAC"):
+        resultado["tipo"] = "factura"
+        res = validar_factura(codigo)
+
+    elif re.match(r'^[A-Z]{3}-',codigo):
+        resultado["tipo"] = "producto"
+        res = validar_producto(codigo)
+
+    else:
+        return resultado
+    
+    resultado["valido"] = res["valido"]
+    resultado["detalles"] = {k: v for k,v in res.items() if k != "valido" and v is not None}
+
+    return resultado
+    
 
 #procesamiento por lotes
