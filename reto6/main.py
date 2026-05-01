@@ -159,7 +159,7 @@ def procesar_lotes(codigos: List[str]) -> Dict:
 
     for codigo in codigos:
         res = validar_codigo(codigo)
-        resultado["detalles"].append(res)
+        resultado["total"] += 1
 
         tipo = res["tipo"]
         resultado["por_tipo"][tipo]["total"] += 1
@@ -169,6 +169,7 @@ def procesar_lotes(codigos: List[str]) -> Dict:
             resultado["por_tipo"][tipo]["validos"] += 1
         else:
             resultado["invalidos"] += 1
+        resultado["detalle"].append(res)
 
     return resultado
 
