@@ -154,3 +154,27 @@ def procesar_lotes(codigos: List[str]) -> Dict:
             resultado["invalidos"] += 1
 
     return resultado
+
+def mostrar_resultado(resultado: Dict) -> None:
+    estado = "OK" if resultado["valido"] else "ERROR"
+    print(f"{estado} {resultado['codigo']:<30} | Tipo: {resultado['tipo']:<12}")
+
+    if resultado["valido"] and resultado["detalles"]:
+        detalles = ", ".join(f"{k}: {v}" for k,v in resultado["detalles"].items() if v)
+        print(f"{detalles}")
+
+def mostrar_reporte(reporte: Dict) -> None:
+    print("=" * 60)
+    print("REPORTE DE VALIDACION")
+    print("=" * 60)
+
+    print(f"\nTotal: {reporte['total']}")
+    print(f"Validos: {reporte['validos']}")
+    print(f"Invalidos: {reporte['invalidos']}")
+
+    print("\nPor tipo:")
+    for tipo, stats in reporte["por_tipo"].items():
+        if stats["total"] > 0:
+            print(f"{tipo}: {stats['validos']}/{stats['total']}")
+
+    print("=" * 60)
