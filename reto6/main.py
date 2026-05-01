@@ -125,7 +125,7 @@ def validar_codigo(codigo: str) -> Dict:
         resultado["tipo"] = "factura"
         res = validar_factura(codigo)
 
-    elif re.match(r'^[A-Za-z]{3,4}-',codigo):
+    elif re.match(r'^[A-Za-z]{3,4}-\d+-[A-Za-z]{2}$',codigo):
         resultado["tipo"] = "producto"
         res = validar_producto(codigo)
 
