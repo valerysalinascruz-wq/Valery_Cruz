@@ -247,3 +247,4 @@ if __name__ == "__main__":
 
     reporte = procesar_lotes(CODIGOS_PRUEBA)
     mostrar_reporte(reporte)
+    exportar_resultados(reporte, "salida.csv")
