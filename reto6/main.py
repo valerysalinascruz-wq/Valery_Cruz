@@ -1,8 +1,24 @@
 import re 
 from typing import Dict,List
+from datetime import datetime
 
 Depa_validos = [ 'VEN', 'ADM', 'TEC', 'LOG', 'RHH']
 Series_validas = [ 'A', 'B', 'C', 'D', 'E']
+
+def sugerir_correccion(codigo: str) -> str:
+    sugerido = codigo.upper()
+
+    if codigo != sugerido:
+        return sugerido
+    
+    return "Sin sugerencia"
+
+def validar_fecha_real(anio: int, mes: int, dia: int ) -> bool:
+    try:
+        datetime(anio, mes, dia)
+        return True
+    except ValueError:
+        return False
 
 #validar producto 
 def validar_producto(codigo: str) -> Dict:
@@ -40,9 +56,8 @@ def validar_envio(codigo: str) -> Dict:
         dia=int(match.group(3))
         sec=match.group(4)
 
-        if 2020 <= anio <= 2030 and 1 <= mes <= 12 and 1 <= dia <= 31:
-            resultado["valido"] = True
-            resultado["fecha"] = f"{anio}-{mes:02d}-{dia:02d}"
+        if 2020 <= int(anio) <= 2030 and validar_fecha_real(int(anio), int(mes), int(dia)):
+            resultado["fecha"] = f"{anio}-{mes}-{dia}"
             resultado["secuencial"]= sec
 
     return resultado
@@ -59,12 +74,11 @@ def validar_empleado(codigo: str) -> Dict:
     match = re.match(patron, codigo)
 
     if match:
-        depto = match.group(1)
-        num = match.group(2)
+        dept, num = match.groups()
 
-        if depto in Depa_validos and not num.sttartswith('0'):
+        if dept in Depa_validos and not num.sttartswith('0'):
             resultado["valido"] = True
-            resultado["departamento"] = depto
+            resultado["departamento"] = dept
             resultado["numero"] =  num 
 
     return resultado
@@ -81,8 +95,7 @@ def validar_factura(codigo: str) -> Dict:
     match = re.match(patron, codigo)
 
     if match:
-        serie = match.group(1)
-        numero = match.group(2)
+        serie ,numero = match.groups()
 
         if serie in Series_validas:
             resultado["valido"] = True
@@ -116,10 +129,14 @@ def validar_codigo(codigo: str) -> Dict:
         res = validar_producto(codigo)
 
     else:
+        resultado["sugerencia"] = sugerir_correccion(codigo)
         return resultado
     
     resultado["valido"] = res["valido"]
-    resultado["detalles"] = {k: v for k,v in res.items() if k != "valido" and v is not None}
+    resultado["detalles"] = {k: v for k,v in res.items() if k != "valido" }
+
+    if not resultado["valido"]:
+        resultado["sugerencia"] = sugerir_correccion(codigo)
 
     return resultado
     
@@ -155,13 +172,26 @@ def procesar_lotes(codigos: List[str]) -> Dict:
 
     return resultado
 
+    
+def exportar_resultados(reporte: Dict, archivo:str) -> None:
+    with open(archivo, 'w', encoding='utf-8') as f:
+        f.write("codigo,tipo,valido,sugerencia\n")
+
+        for r in reporte["detalle"]:
+            fila= f"{r['codigo']},{r['tipo']},{r['valido']},{r.get('sugerencia','')}\n"
+
+    print(f"Archivo exportado: {archivo}")
+
 def mostrar_resultado(resultado: Dict) -> None:
     estado = "OK" if resultado["valido"] else "ERROR"
     print(f"{estado} {resultado['codigo']:<30} | Tipo: {resultado['tipo']:<12}")
 
     if resultado["valido"] and resultado["detalles"]:
         detalles = ", ".join(f"{k}: {v}" for k,v in resultado["detalles"].items() if v)
-        print(f"{detalles}")
+        print(f"    -> {detalles}")
+
+    if not resultado["valido"] and resultado["sugerencia"]:
+        print(f"    ->Sugerencia: {resultado['sugerencia']}")
 
 def mostrar_reporte(reporte: Dict) -> None:
     print("=" * 60)
@@ -178,3 +208,4 @@ def mostrar_reporte(reporte: Dict) -> None:
             print(f"{tipo}: {stats['validos']}/{stats['total']}")
 
     print("=" * 60)
+
