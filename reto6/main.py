@@ -28,7 +28,7 @@ def validar_producto(codigo: str) -> Dict:
         "numero": None,
         "pais": None
     }
-    patron = r'^([A-Z]{3})-(/d{4})-([A-Z]{2})$'
+    patron = r'^([A-Z]{3})-(\d{4})-([A-Z]{2})$'
     match = re.match(patron, codigo)
 
     if match:
@@ -43,11 +43,11 @@ def validar_producto(codigo: str) -> Dict:
 def validar_envio(codigo: str) -> Dict:
     resultado = {
         "valido": False,
-        "fehca": None,
+        "fecha": None,
         "secuencial": None
     }
 
-    patron= r'^ENV-(/d{4})-(/d{2})-(/d{2})-(/d{6})$'
+    patron= r'^ENV-(\d{4})-(\d{2})-(\d{2})-(\d{6})$'
     match =re.match(patron, codigo)
 
     if match:
@@ -59,6 +59,7 @@ def validar_envio(codigo: str) -> Dict:
         if 2020 <= int(anio) <= 2030 and validar_fecha_real(int(anio), int(mes), int(dia)):
             resultado["fecha"] = f"{anio}-{mes}-{dia}"
             resultado["secuencial"]= sec
+            resultado["valido"]= True
 
     return resultado
 
@@ -70,13 +71,13 @@ def validar_empleado(codigo: str) -> Dict:
         "numero": None
     }
 
-    patron = r'^EMP-([A-Z]{3})-(/d{4})$'
+    patron = r'^EMP-([A-Z]{3})-(\d{4})$'
     match = re.match(patron, codigo)
 
     if match:
         dept, num = match.groups()
 
-        if dept in Depa_validos and not num.sttartswith('0'):
+        if dept in Depa_validos and not num.startswith('0'):
             resultado["valido"] = True
             resultado["departamento"] = dept
             resultado["numero"] =  num 
@@ -91,7 +92,7 @@ def validar_factura(codigo: str) -> Dict:
         "numero": None
     }
 
-    patron = r'^FAC-([A-Z])-(/d{6})$'
+    patron = r'^FAC-([A-Z])-(\d{6})$'
     match = re.match(patron, codigo)
 
     if match:
@@ -144,14 +145,14 @@ def validar_codigo(codigo: str) -> Dict:
 #procesamiento por lotes
 def procesar_lotes(codigos: List[str]) -> Dict:
     resultado = {
-        "total": len(codigos),
+        "total": 0,
         "validos": 0,
         "invalidos": 0,
         "por_tipo":{
             "producto": {"total": 0, "validos": 0},
             "envio": {"total": 0, "validos": 0},
             "empleado": {"total": 0, "validos": 0},
-            "fatura": {"total": 0, "validos": 0},
+            "factura": {"total": 0, "validos": 0},
             "desconocido": {"total": 0, "validos": 0}
         },
         "detalle": []
@@ -180,6 +181,7 @@ def exportar_resultados(reporte: Dict, archivo:str) -> None:
 
         for r in reporte["detalle"]:
             fila= f"{r['codigo']},{r['tipo']},{r['valido']},{r.get('sugerencia','')}\n"
+            f.write(fila)
 
     print(f"Archivo exportado: {archivo}")
 
