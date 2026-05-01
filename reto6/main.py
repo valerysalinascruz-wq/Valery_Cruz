@@ -125,3 +125,32 @@ def validar_codigo(codigo: str) -> Dict:
     
 
 #procesamiento por lotes
+def procesar_lotes(codigos: List[str]) -> Dict:
+    resultado = {
+        "total": len(codigos),
+        "validos": 0,
+        "invalidos": 0,
+        "por_tipo":{
+            "producto": {"total": 0, "validos": 0},
+            "envio": {"total": 0, "validos": 0},
+            "empleado": {"total": 0, "validos": 0},
+            "fatura": {"total": 0, "validos": 0},
+            "desconocido": {"total": 0, "validos": 0}
+        },
+        "detalle": []
+    }
+
+    for codigo in codigos:
+        res = validar_codigo(codigo)
+        resultado["detalles"].append(res)
+
+        tipo = res["tipo"]
+        resultado["por_tipo"][tipo]["total"] += 1
+
+        if res["valido"]:
+            resultado["validos"] += 1
+            resultado["por_tipo"][tipo]["validos"] += 1
+        else:
+            resultado["invalidos"] += 1
+
+    return resultado
