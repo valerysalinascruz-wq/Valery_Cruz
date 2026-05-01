@@ -48,6 +48,26 @@ def validar_envio(codigo: str) -> Dict:
     return resultado
 
 #validar_empleado
+def validar_empleado(codigo: str) -> Dict:
+    resultado = {
+        "valido":False,
+        "departamento": None,
+        "numero": None
+    }
+
+    patron = r'^EMP-([A-Z]{3})-(/d{4})$'
+    match = re.match(patron, codigo)
+
+    if match:
+        depto = match.group(1)
+        num = match.group(2)
+
+        if depto in Depa_validos and not num.sttartswith('0'):
+            resultado["valido"] = True
+            resultado["departamento"] = depto
+            resultado["numero"] =  num 
+
+    return resultado
 
 #validar_factura
 
