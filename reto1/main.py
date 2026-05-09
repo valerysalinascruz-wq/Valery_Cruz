@@ -41,18 +41,9 @@ def procesar_linea(linea):
 
 
 def main():
-
-    while True:
-        try:
-            pedircad = input("Ingrese la cadena SEPARANDO con comas los valores: \n")
-        except EOFError: #Error si no hay entrada
-            break
-
-        if pedircad == '':
-            break
-
-        resultadosuma = procesar_linea(pedircad)
-        print(f"Resultado de la suma de la cadena: \n",resultadosuma)
+    for linea in sys.stdin:
+        resultado = procesar_linea(linea)
+        print(resultado)
 
 #Verifica que el archivo este ejecutando 
 #Ejecuta la funcion principal
