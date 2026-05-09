@@ -1,15 +1,15 @@
 import sys
-'''
-    """Convierte Fahrenheit a Celsius."""
-'''
+
+#Convierte Fahrenheit a Celsius.
+
 def convertir_a_Cel(valor,unidad):
     if unidad == 'F':
         return (valor - 32) * 5 / 9
     return valor
 
-'''
-    """Clasifica la temperatura."""
-'''
+
+#Clasifica la temperatura.
+
 def clasf_temp(temp):
     if temp < 0 :
         return "Congelante"
