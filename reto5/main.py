@@ -1,5 +1,6 @@
 import argparse
 import sys
+import os
 
 def es_valor_nulo(valor):
     if valor is None:
@@ -145,6 +146,8 @@ def main():
         ]
 
         perfiles.append(perfilar_columna(col, valores))
+
+    os.makedirs(os.path.dirname(args.output), exist_ok=True)
 
     escribir_csv(args.output, perfiles)
 
