@@ -1,5 +1,5 @@
 import sys
-
+import math
 
 def main():
     datos_productos={}
@@ -17,16 +17,18 @@ def main():
 
         columnas=linea.split(",")
 
-        if len(columnas)<4:
+        if len(columnas) != 4:
             continue
 
-        columnas = columnas[:4]
         producto=columnas[1]
 
         try:
             cantidad=int(columnas[2])
             precio=float(columnas[3])
-        except:
+        except ValueError:
+            continue
+
+        if not math.isfinite(precio):
             continue
 
         if producto not in datos_productos:
