@@ -1,3 +1,5 @@
+import math
+
 def validar_sku(sku) :
     if not sku or not str(sku).strip() :
         return False
@@ -6,7 +8,7 @@ def validar_sku(sku) :
 def validar_precio(precio) :
     try:
         precio = float(precio)
-        return precio >= 0
+        return precio >= 0 and math.isfinite(precio)
     except:
         return False
 
